@@ -31,10 +31,9 @@ interface LinkItem {
 })
 export class NavComponent implements OnInit, OnDestroy {
 	links: LinkItem[] = [
-		{ path: ["/projects"], title: "Projects" },
-		{ path: ["/users"], title: "Users" },
-		{ path: ["/signup"], title: "Sign up" },
-		{ path: ["/login"], title: "Log in" },
+		{ path: ["/article/add"], title: "Add articles" },
+		{ path: ["/article/list"], title: "Articles" },
+		{ path: ["/user/list"], title: "User list" },
 	];
 
 	appTitle = this.appInfo.title;
