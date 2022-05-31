@@ -3,7 +3,7 @@
 	"index": "/index.html",
 	"assetGroups": [
 		{
-			"name": "js-ng_articles",
+			"name": "ts-ng_articles",
 			"installMode": "prefetch",
 			"resources": {
 				"files": [

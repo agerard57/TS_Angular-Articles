@@ -1,4 +1,4 @@
-# JS-NG_articles
+# TS-NG_articles
 
 ## What does it have?
 
