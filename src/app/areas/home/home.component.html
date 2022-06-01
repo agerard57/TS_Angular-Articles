@@ -1,6 +1,10 @@
 <h1>
 	{{ title }}
 </h1>
-<p>Welcome to my angular project</p>
-
+<h3 *ngIf="!auth.loggedIn; else loggedMessage">
+	Welcome to my angular project!
+</h3>
+<ng-template #loggedMessage
+	><h3>Welcome back, {{ auth.currentUser.email }}!</h3></ng-template
+>
 <p>See all the articles <a routerLink="/article/list">here</a></p>

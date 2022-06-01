@@ -33,17 +33,22 @@
 				</a>
 			</li>
 		</ul>
-		<a routerLink="/auth"
+		<a routerLink="/user/register" *ngIf="!auth.loggedIn"
 			><button class="btn btn-outline-light my-2 my-sm-0">
-				Sign up / Log in
+				Register
 			</button></a
 		>
-		<a routerLink="/user/profile"
+		<a routerLink="/user/login" *ngIf="!auth.loggedIn"
+			><button class="btn btn-outline-light my-2 my-sm-0">
+				Log in
+			</button></a
+		>
+		<a routerLink="/user/profile" *ngIf="auth.loggedIn"
 			><button class="btn btn-outline-info my-2 my-sm-0">
 				Profile
 			</button></a
 		>
-		<a routerLink="/auth/logout"
+		<a routerLink="/user/logout" *ngIf="auth.loggedIn"
 			><button class="btn btn-outline-danger my-2 my-sm-0">
 				Log out
 			</button></a

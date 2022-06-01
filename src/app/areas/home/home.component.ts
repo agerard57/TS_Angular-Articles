@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { AuthService } from "app/services/auth.service";
 
 import { AppInfoService } from "../../shared";
 
@@ -10,5 +11,6 @@ import { AppInfoService } from "../../shared";
 export class HomeComponent {
 	title = this.appInfo.title;
 
-	constructor(private appInfo: AppInfoService) {}
+	constructor(public auth: AuthService,
+		private appInfo: AppInfoService) {}
 }

@@ -11,6 +11,7 @@ import {
 import { DOCUMENT } from "@angular/common";
 
 import { AppInfoService } from "../../shared";
+import { AuthService } from "app/services/auth.service";
 
 export function isHtmlLinkElement(
 	element: Element,
@@ -51,6 +52,7 @@ export class NavComponent implements OnInit, OnDestroy {
 		@Inject(DOCUMENT)
 		private document: any,
 		private appInfo: AppInfoService,
+		public auth: AuthService,
 		private renderer: Renderer2,
 	) {}
 
