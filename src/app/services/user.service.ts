@@ -7,7 +7,7 @@ import { User } from "../shared/models/user.model";
 // Avatars URL
 @Injectable()
 export class UserService {
-	urlBase = "https://reseau.jdedev.fr/api/user"	
+	urlBase = "https://reseau.jdedev.fr/api/user"	//CLEAN THIS IN ENV
 	
 	httpOptions = {
 		headers: new HttpHeaders({
