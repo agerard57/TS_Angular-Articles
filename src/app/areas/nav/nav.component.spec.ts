@@ -2,12 +2,12 @@ import { TestBed, async } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 
 import { NavComponent } from "./nav.component";
-import { AppSharedModule } from "../../shared";
+import { SharedModule } from "../../shared";
 
 describe("NavComponent", () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [RouterTestingModule, AppSharedModule],
+			imports: [RouterTestingModule, SharedModule],
 			declarations: [NavComponent],
 		}).compileComponents();
 	}));

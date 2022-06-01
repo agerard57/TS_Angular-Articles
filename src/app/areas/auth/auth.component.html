@@ -1,1 +1,81 @@
-<p>auth works!</p>
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card bg-dark">
+	<h4 class="card-header">Register</h4>
+	<div class="card-body">
+		<form [formGroup]="registerForm" (ngSubmit)="register()">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<i class="fa fa-user"></i>
+					</span>
+				</div>
+				<input
+					[ngClass]="setClassPseudo()"
+					class="form-control"
+					type="text"
+					name="pseudo"
+					formControlName="pseudo"
+					placeholder="Username"
+					autofocus
+				/>
+			</div>
+			<p>Must be between 2 and 30 chars and without special characters</p>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<i class="fa fa-envelope"></i>
+					</span>
+				</div>
+				<input
+					[ngClass]="setClassEmail()"
+					class="form-control"
+					type="email"
+					name="email"
+					formControlName="email"
+					placeholder="Email"
+				/>
+			</div>
+			<p>Must be a valid email address</p>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<i class="fa fa-key"></i>
+					</span>
+				</div>
+				<input
+					[ngClass]="setClassPassword()"
+					class="form-control"
+					type="password"
+					name="password"
+					formControlName="password"
+					placeholder="Password"
+				/>
+			</div>
+			<p>Must be at least 6 characters</p>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<i class="fa fa-link"></i>
+					</span>
+				</div>
+				<input
+					[ngClass]="setClassAvatarUrl()"
+					class="form-control"
+					type="url"
+					name="avatar"
+					formControlName="avatar"
+					placeholder="Avatar"
+				/>
+			</div>
+			<p>Must be a valid URL to an image</p>
+			<button
+				class="btn btn-primary"
+				type="submit"
+				[disabled]="!registerForm.valid"
+			>
+				<i class="fa fa-user-plus"></i> Register
+			</button>
+		</form>
+	</div>
+</div>
