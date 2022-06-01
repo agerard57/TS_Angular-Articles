@@ -12,9 +12,9 @@ import { ToastComponent } from "../../shared/toast/toast.component";
 
 @Component({
 	selector: "app-register",
-	templateUrl: "./auth.component.html",
+	templateUrl: "./register.component.html",
 })
-export class AuthComponent {
+export class RegisterComponent {
 	registerForm: FormGroup;
 	pseudo = new FormControl("", [
 		Validators.required,

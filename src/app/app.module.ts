@@ -5,7 +5,7 @@ import {
 import { NgModule } from "@angular/core";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
@@ -13,11 +13,13 @@ import { AppComponent } from "./app.component";
 import { AREAS_COMPONENTS } from "./areas/index";
 import { SharedModule } from "./shared";
 import { UserService } from "./services/user.service";
+import { TokenInterceptorService } from "./services/token-interceptor.service";
+import { AuthService } from "./services/auth.service";
 
 @NgModule({
 	declarations: [AppComponent, ...AREAS_COMPONENTS],
 	imports: [
-		// vendors
+
 		BrowserModule.withServerTransition({ appId: "serverApp" }),
 		FormsModule,
 		HttpClientModule,
@@ -26,11 +28,14 @@ import { UserService } from "./services/user.service";
 		}),
 		BrowserTransferStateModule,
 
-		// app
 		SharedModule,
 		AppRoutingModule,
 	],
-	providers: [UserService],
+	providers: [{
+		provide: HTTP_INTERCEPTORS,
+		useClass: TokenInterceptorService,
+		multi: true,
+	  },AuthService, UserService],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
