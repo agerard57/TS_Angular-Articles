@@ -3,8 +3,8 @@ import { Article } from "app/shared/models/article.model";
 import { Comment } from "app/shared/models/comment.model";
 import { ToastComponent } from 'app/shared/toast/toast.component';
 import { ArticleService } from "../../services/article.service";
-import { CommentService } from "../../services/comment.service";
-
+/* import { CommentService } from "../../services/comment.service";
+ */
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
@@ -18,8 +18,8 @@ export class ArticleListComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService,
-    private commentService: CommentService,
-		public toast: ToastComponent) { }
+/*     private commentService: CommentService,
+ */		public toast: ToastComponent) { }
 
   ngOnInit(): void {		
     this.getArticles();
