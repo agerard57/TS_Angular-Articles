@@ -20,8 +20,8 @@ export class CommentService {
 		return this.http.post<Comment>(this.urlBase, comment);
 	}
 
-	getComment(comment: Comment): Observable<Comment> {
-		return this.http.get<Comment>(`${this.urlBase}/${comment._comment_id}`); //DON'T LET IN PUBLIC IF ID IS PRIVATE
+	getComment(id: number): Observable<Comment> {
+		return this.http.get<Comment>(`${this.urlBase}/${id}`);
 	}
 
 	getComments(): Observable<Comment[]> {
@@ -30,7 +30,7 @@ export class CommentService {
 
 	editComment(comment: Comment): Observable<any> {
 		return this.http.put(
-			`${this.urlBase}/${comment._comment_id}`,
+			`${this.urlBase}/${comment.id_commentaire}`,
 			comment,
 			{
 				responseType: "text",
@@ -39,7 +39,7 @@ export class CommentService {
 	}
 
 	deleteComment(comment: Comment): Observable<any> {
-		return this.http.delete(`${this.urlBase}/${comment._comment_id}`, {
+		return this.http.delete(`${this.urlBase}/${comment.id_commentaire}`, {
 			responseType: "text",
 		});
 	}

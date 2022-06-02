@@ -20,23 +20,23 @@ export class ArticleService {
 		return this.http.post<Article>(this.urlBase, article);
 	}
 
-	getArticle(article: Article): Observable<Article> {
-		return this.http.get<Article>(`${this.urlBase}/${article._article_id}`); //DON'T LET IN PUBLIC IF ID IS PRIVATE
+	getArticle(id : number): Observable<Article> {
+		return this.http.get<Article>(`${this.urlBase}/${id}`);
 	}
 
 	getArticles(): Observable<Article[]> {
 		return this.http.get<Article[]>(this.urlBase);
 	}
 
-	getCommentByArticle(article: Article): Observable<Article> {
+	getCommentByArticle(id : number): Observable<Article> {
 		return this.http.get<Article>(
-			`${this.urlBase}/${article._article_id}/comment`,
-		); //DON'T LET IN PUBLIC IF ID IS PRIVATE
+			`${this.urlBase}/${id}/comment`,
+		);
 	}
 
 	editArticle(article: Article): Observable<any> {
 		return this.http.put(
-			`${this.urlBase}/${article._article_id}`,
+			`${this.urlBase}/${article.id_article}`,
 			article,
 			{
 				responseType: "text",
@@ -45,7 +45,7 @@ export class ArticleService {
 	}
 
 	deleteArticle(article: Article): Observable<any> {
-		return this.http.delete(`${this.urlBase}/${article._article_id}`, {
+		return this.http.delete(`${this.urlBase}/${article.id_article}`, {
 			responseType: "text",
 		});
 	}
