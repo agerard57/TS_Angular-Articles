@@ -26,8 +26,8 @@ export class UserService {
 		return this.http.post(this.urlBase + "/connect", credentials);
 	}
 
-	getUser(user: User): Observable<User> {
-		return this.http.get<User>(`${this.urlBase}/${user._user_id}`); //DON'T LET IN PUBLIC IF ID IS PRIVATE
+	getUser(id: number): Observable<User> {
+		return this.http.get<User>(`${this.urlBase}/${id}`); //DON'T LET IN PUBLIC IF ID IS PRIVATE
 	}
 
 	getUsers(): Observable<User[]> {
@@ -35,22 +35,22 @@ export class UserService {
 	}
 
 	//TODO ANY ??
-	getArticlesByUser(user: User): Observable<any> {
-		return this.http.get<User>(this.urlBase + `/${user._user_id}/article`);
+	getArticlesByUser(id : number): Observable<any> {
+		return this.http.get<User>(this.urlBase + `/${id}/article`);
 	}
 
-	getCommentsByUser(user: User): Observable<any> {
-		return this.http.get<User>(this.urlBase + `/${user._user_id}/comment`);
+	getCommentsByUser(id : number): Observable<any> {
+		return this.http.get<User>(this.urlBase + `/${id}/comment`);
 	}
 
 	editUser(user: User): Observable<any> {
-		return this.http.put(`${this.urlBase}/${user._user_id}`, user, {
+		return this.http.put(`${this.urlBase}/${user.id}`, user, {
 			responseType: "text",
 		});
 	}
 
-	deleteUser(user: User): Observable<any> {
-		return this.http.delete(`${this.urlBase}/${user._user_id}`, {
+	deleteUser(id : number): Observable<any> {
+		return this.http.delete(`${this.urlBase}/${id}`, {
 			responseType: "text",
 		});
 	}
