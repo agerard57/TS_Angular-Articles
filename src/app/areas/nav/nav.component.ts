@@ -46,6 +46,7 @@ export class NavComponent implements OnInit, OnDestroy {
 	@ViewChild("menu", { static: true }) menuElementRef: ElementRef | undefined;
 
 	private domClickListener$$!: () => void;
+	id = localStorage.getItem("id"); //change this
 
 	constructor(
 		@Optional()
