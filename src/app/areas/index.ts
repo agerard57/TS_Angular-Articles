@@ -10,6 +10,7 @@ import { NavComponent } from "./nav/nav.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { UserListComponent } from "./user-list/user-list.component";
 import { UserProfileComponent } from "./user-profile/user-profile.component";
+import { ViewArticleComponent } from "./article-view/article-view.component";
 import { LoginComponent } from "./login/login.component";
 import { LogoutComponent } from "./logout/logout.component";
 import { AuthGuardLogged } from "../services/auth-guard-logged.service";
@@ -29,11 +30,11 @@ export const AREAS_ROUTES: Routes = [
 		component: ArticleListComponent,
 		canActivate: [AuthGuardLogged],
 	},
-	/* 	{
+	{
 		path: "article/:id",
 		component: ViewArticleComponent,
 		canActivate: [AuthGuardLogged],
-	}, */
+	},
 	{
 		path: "user/register",
 		component: RegisterComponent,
@@ -77,4 +78,5 @@ export const AREAS_COMPONENTS = [
 	ErrorComponent,
 	NotFoundComponent,
 	ArticleListComponent,
+	ViewArticleComponent
 ];

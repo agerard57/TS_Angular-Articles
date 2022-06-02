@@ -1,31 +1,41 @@
 <section>
-	<h2>Add an article</h2>
-	<form class="card mb-3">
-		<div class="form-group">
-			<label for="title" class="text-dark">Article title</label>
-			<input
-				id="title"
-				name="title"
-				type="text"
-				required="required"
-				class="form-control"
-			/>
+	<h2>Article</h2>
+	<div class="card text-dark mb-3">
+		<div class="card-header">
+			<h5 class="title text-dark">{{article.titre | empty}}</h5> - {{article.id}}
 		</div>
-		<div class="form-group">
-			<label for="content" class="text-dark">Article content</label>
-			<textarea
-				id="content"
-				name="content"
-				cols="40"
-				rows="5"
-				class="form-control"
-				required="required"
-			></textarea>
+		<div class="card-body">
+			<p class="card-text">
+				{{article.contenu | empty}}
+			</p>
 		</div>
-		<div class="form-group">
-			<button name="submit" type="submit" class="btn btn-primary">
-				Add article
-			</button>
-		</div>
-	</form>
+		<div class="card-footer blockquote-footer">{{article.creation | date}}</div></div>	
+		<h2>Comments</h2>
+
+		<div class="card text-dark mb-3">
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item">
+				<form class="input-group">
+					<input
+						type="text"
+						class="form-control"
+						name="comment"
+						placeholder="Add a comment..."
+					/>
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button">
+							Comment
+						</button>
+					</span>
+				</form>
+			</li>
+			<li class="list-group-item" *ngFor="let comment of comments;">
+				{{comment.contenu | empty}}
+				<footer class="blockquote-footer">
+					<cite>{{comment.id}}</cite>
+				</footer>
+			</li>
+		</ul>
+	</div>
+	<a class="card-link" (click)="back()" >Go back</a>
 </section>
