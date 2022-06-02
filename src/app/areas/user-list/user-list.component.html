@@ -3,7 +3,7 @@
 	<div class="card-columns">
 		<div
 			class="card text-white bg-dark mb-3"
-			*ngFor="let user of users; index as i"
+			*ngFor="let user of users;"
 			[routerLink]="['/user', user.id]"
 		>
 			<div class="row no-gutters">

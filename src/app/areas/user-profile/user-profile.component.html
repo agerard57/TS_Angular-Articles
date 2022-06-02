@@ -92,7 +92,7 @@
 							>
 						</h6>
 					</div>
-					<div class="card-body" *ngFor="let article of articles; index as i">
+					<div class="card-body" *ngFor="let article of articles;">
 						<div class="row" >
 							<h6 class="mb-0">
 								<a class="link-secondary" href="" [routerLink]="['/article',article.id_article]"
@@ -112,7 +112,7 @@
 							>
 						</h6>
 					</div>
-					<div class="card-body" *ngFor="let comment of comments; index as i">
+					<div class="card-body" *ngFor="let comment of comments;">
 						<div class="row">
 							<span class="blockquote-footer" class="mb-0">
 								<cite
