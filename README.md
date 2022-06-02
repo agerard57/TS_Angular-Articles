@@ -12,17 +12,12 @@
 
 ## todo (fr)
 
-- Rendu
 - Liste utilisateurs
 - Détail utilisateurs
 - Liste des articles et des commentaires
-- Page connexion
-- Page inscription
 - API Connexion
 - API Inscription
 - Navbar co/déco
-- Joli CSS
-- Stockage token
 - Liste articles
 - liste commentaires
 - Ajout articles
@@ -35,9 +30,7 @@
 - Liste user
 - Profile user
 - Modif user (si profil de l'user)
-- Supp use (si profil de l'user)
-- Tests sur composants aux choix
-- Tests sur services aux choix
+- Supp user (si profil de l'user)
 
 ## Getting Started
 
