@@ -29,6 +29,11 @@ export const AREAS_ROUTES: Routes = [
 		component: ArticleListComponent,
 		canActivate: [AuthGuardLogged],
 	},
+	/* 	{
+		path: "article/:id",
+		component: ViewArticleComponent,
+		canActivate: [AuthGuardLogged],
+	}, */
 	{
 		path: "user/register",
 		component: RegisterComponent,
@@ -50,7 +55,7 @@ export const AREAS_ROUTES: Routes = [
 		canActivate: [AuthGuardLogged],
 	},
 	{
-		path: "user/profile",
+		path: "user/:id",
 		component: UserProfileComponent,
 		canActivate: [AuthGuardLogged],
 	},
