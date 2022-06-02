@@ -22,7 +22,6 @@ export class UserProfileComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private userService: UserService,
-
 		public toast: ToastComponent,
 	) {}
 
@@ -43,7 +42,7 @@ export class UserProfileComponent implements OnInit {
 
 	getUserInfo(id: number): void {
 		this.userService.getUser(id).subscribe({
-			next: (article: Article) => (console.log(article)),
+			next: (user: User) => (console.log(user)), //Doesn't seem right? next: (article: Article) => (console.log(article)),
 			error: (_error: any) =>
 				this.toast.setMessage("Error fetching users", "danger"),
 		});
@@ -53,7 +52,7 @@ export class UserProfileComponent implements OnInit {
 		this.userService.getArticlesByUser(id).subscribe({
 			next: (articles: Article[]) => (this.articles = articles.slice(Math.max(articles.length - 3,0))),
 			error: (_error: any) =>
-				this.toast.setMessage("Error fetching users", "danger"),
+				this.toast.setMessage("Error fetching articles", "danger"),
 		});
 	}
 
@@ -61,7 +60,7 @@ export class UserProfileComponent implements OnInit {
 		this.userService.getCommentsByUser(id).subscribe({
 			next: (comments: Comment[]) => (this.comments = comments.slice(Math.max(comments.length - 3,0))),
 			error: (_error: any) =>
-				this.toast.setMessage("Error fetching users", "danger"),
+				this.toast.setMessage("Error fetching comments", "danger"),
 		});
 	}
 
