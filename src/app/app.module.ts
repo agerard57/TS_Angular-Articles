@@ -6,6 +6,7 @@ import { NgModule } from "@angular/core";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
@@ -17,9 +18,12 @@ import { TokenInterceptorService } from "./services/token-interceptor.service";
 import { AuthService } from "./services/auth.service";
 import { AuthGuardLogged } from "./services/auth-guard-logged.service";
 import { AuthGuardNotLogged } from "./services/auth-guard-not-logged.service";
+import { ArticleService } from "./services/article.service";
+import { CommentService } from "./services/comment.service";
+import {TruncatePipe} from "./pipes/truncate/truncate.pipe"
 
 @NgModule({
-	declarations: [AppComponent, ...AREAS_COMPONENTS],
+	declarations: [AppComponent, ...AREAS_COMPONENTS, TruncatePipe],
 	imports: [
 		BrowserModule.withServerTransition({ appId: "serverApp" }),
 		FormsModule,
@@ -28,7 +32,11 @@ import { AuthGuardNotLogged } from "./services/auth-guard-not-logged.service";
 			enabled: environment.production,
 		}),
 		BrowserTransferStateModule,
-
+		JwtModule.forRoot({
+			config: {
+			  tokenGetter: (): string | null => localStorage.getItem('token'),
+			}
+		  }),
 		SharedModule,
 		AppRoutingModule,
 	],
@@ -40,6 +48,8 @@ import { AuthGuardNotLogged } from "./services/auth-guard-not-logged.service";
 		},
 		AuthService,
 		UserService,
+		ArticleService,
+		CommentService,
 		AuthGuardLogged,
 		AuthGuardNotLogged,
 	],
