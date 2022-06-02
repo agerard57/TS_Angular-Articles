@@ -1,12 +1,17 @@
 .card-img {
-    padding: 15%;
-    border-radius: 20%;
+	padding: 15%;
+	border-radius: 20%;
 }
 
 h5 {
-    align-self: center;
+	align-self: center;
 }
 
 .card {
-    margin: 3%;
+	margin: 3%;
+}
+.card:hover > .row {
+	background-color: #383d60;
+	text-decoration: underline;
+	cursor: pointer;
 }

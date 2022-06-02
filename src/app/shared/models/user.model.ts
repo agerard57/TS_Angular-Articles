@@ -1,6 +1,7 @@
 export class User {
 	_user_id?: string;
-	username?: string;
+	pseudo?: string;
 	email?: string;
 	token?: string;
+	avatar?: string;
 }
