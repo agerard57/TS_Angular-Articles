@@ -23,6 +23,9 @@ footer {
 	min-height: 64px;
 	color: $footer-text-color;
 	background: $footer-bg-color;
+	position:fixed;	
+    bottom: 0;
+
 
 	.fa-heart {
 		color: $footer-icon-color;
