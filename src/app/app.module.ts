@@ -12,6 +12,7 @@ import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { AREAS_COMPONENTS } from "./areas/index";
+import { PIPES_COMPONENTS } from "./pipes/index";
 import { SharedModule } from "./shared";
 import { UserService } from "./services/user.service";
 import { TokenInterceptorService } from "./services/token-interceptor.service";
@@ -20,13 +21,14 @@ import { AuthGuardLogged } from "./services/auth-guard-logged.service";
 import { AuthGuardNotLogged } from "./services/auth-guard-not-logged.service";
 import { ArticleService } from "./services/article.service";
 import { CommentService } from "./services/comment.service";
-import {TruncatePipe} from "./pipes/truncate/truncate.pipe"
+import { CommonModule } from "@angular/common";
 
 @NgModule({
-	declarations: [AppComponent, ...AREAS_COMPONENTS, TruncatePipe],
+	declarations: [AppComponent, ...AREAS_COMPONENTS, ...PIPES_COMPONENTS],
 	imports: [
-		BrowserModule.withServerTransition({ appId: "serverApp" }),
+		BrowserModule,
 		FormsModule,
+		CommonModule,
 		HttpClientModule,
 		ServiceWorkerModule.register("/ngsw-worker.js", {
 			enabled: environment.production,
