@@ -1,16 +1,7 @@
 export class Article {
-	_article_id?: number;
-	_user_id?: number;
-	title?: string;
-	content?: string;
-	creation_date?: string;
+	contenu?: string
+	creation?: string
+	id?: number
+	id_article?: number
+	titre?: string
 }
-
-/* 
-Given data:
-	_id_article?: number;
-	_id?: number;
-	titre?: string;
-	contenu?: string;
-	creation?: string;
-*/
