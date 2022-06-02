@@ -15,11 +15,12 @@ import { SharedModule } from "./shared";
 import { UserService } from "./services/user.service";
 import { TokenInterceptorService } from "./services/token-interceptor.service";
 import { AuthService } from "./services/auth.service";
+import { AuthGuardLogged } from "./services/auth-guard-logged.service";
+import { AuthGuardNotLogged } from "./services/auth-guard-not-logged.service";
 
 @NgModule({
 	declarations: [AppComponent, ...AREAS_COMPONENTS],
 	imports: [
-
 		BrowserModule.withServerTransition({ appId: "serverApp" }),
 		FormsModule,
 		HttpClientModule,
@@ -31,11 +32,17 @@ import { AuthService } from "./services/auth.service";
 		SharedModule,
 		AppRoutingModule,
 	],
-	providers: [{
-		provide: HTTP_INTERCEPTORS,
-		useClass: TokenInterceptorService,
-		multi: true,
-	  },AuthService, UserService],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: TokenInterceptorService,
+			multi: true,
+		},
+		AuthService,
+		UserService,
+		AuthGuardLogged,
+		AuthGuardNotLogged,
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

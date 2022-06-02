@@ -1,0 +1,18 @@
+@import "vars";
+
+div {
+	margin-top: 30vh;
+}
+
+h1 {
+	font-size: $font-size-xxl;
+}
+
+p {
+	color: $text-semi-diffuse-color;
+}
+
+button {
+	top: 10px;
+	position: relative;
+}
