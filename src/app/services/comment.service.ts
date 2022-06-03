@@ -28,9 +28,9 @@ export class CommentService {
 		return this.http.get<Comment[]>(this.urlBase);
 	}
 
-	editComment(comment: Comment): Observable<any> {
+	editComment(comment: Comment, commentId : number): Observable<any> {
 		return this.http.put(
-			`${this.urlBase}/${comment.id_commentaire}`,
+			`${this.urlBase}/${commentId}`,
 			comment,
 			{
 				responseType: "text",
@@ -38,8 +38,8 @@ export class CommentService {
 		);
 	}
 
-	deleteComment(comment: Comment): Observable<any> {
-		return this.http.delete(`${this.urlBase}/${comment.id_commentaire}`, {
+	deleteComment(id : number): Observable<any> {
+		return this.http.delete(`${this.urlBase}/${id}`, {
 			responseType: "text",
 		});
 	}
