@@ -1,8 +1,5 @@
 import { Component } from "@angular/core";
-import { User } from "app/shared/models/user.model";
-import { Comment } from "app/shared/models/comment.model";
-import { CommentService } from "app/services/comment.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ToastComponent } from "app/shared/toast/toast.component";
 import { ArticleService } from "app/services/article.service";
 import { Article } from "app/shared/models/article.model";
@@ -10,62 +7,55 @@ import { Location } from "@angular/common";
 import { UserService } from "app/services/user.service";
 import { first } from "rxjs/operators";
 import { FindUsernameById } from "app/services/find-username-by-id.service";
+import { AuthService } from "app/services/auth.service";
 import {
 	FormGroup,
 	FormControl,
 	Validators,
 	FormBuilder,
 } from "@angular/forms";
+import { CommentService } from "app/services/comment.service";
 
 @Component({
 	selector: "app-article-view",
 	templateUrl: "./article-view.component.html",
 	styleUrls: ["./article-view.component.scss"],
 })
-export class ViewArticleComponent{
-	user = new User();
+export class ViewArticleComponent {
 	article = new Article();
-	comment = new Comment();
-	comments: Comment[] = [];
-	id = "1";
 	authorUsername?: string;
-	commentForm: FormGroup;
+	articleEditionForm: FormGroup;
+	titre = new FormControl("", [
+		Validators.required,
+		Validators.maxLength(100),
+	]);
 	contenu = new FormControl("", [
 		Validators.required,
-		Validators.maxLength(150),
+		Validators.maxLength(240),
 	]);
+	id = 0;
+	editMode = false;
 
 	constructor(
-		private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
 		private articleService: ArticleService,
-		private commentService: CommentService,
 		private findByIdService: FindUsernameById,
 		private userService: UserService,
+		private auth: AuthService,
+		private formBuilder: FormBuilder,
 		public toast: ToastComponent,
+		private router: Router,
+
 		private location: Location,
 	) {
 		this.route.params.subscribe((params) => {
 			this.id = params["id"];
-			this.getArticle(params["id"]);
-			this.getComments(params["id"]);
+			this.getArticle(this.id);
 		});
 
-		this.commentForm = this.formBuilder.group({
+		this.articleEditionForm = this.formBuilder.group({
+			titre: this.titre,
 			contenu: this.contenu,
-			idArt: this.id,
-		});
-	}
-	
-	getComments(id: number): void {
-		this.commentService.getComments().subscribe({
-			next: (comments: Comment[]) => {
-				this.comments = comments.filter(
-					(comment) => comment.id_article == id,
-				);
-			},
-			error: (_error: any) =>
-				this.toast.setMessage("Error fetching comments", "danger"),
 		});
 	}
 
@@ -79,9 +69,7 @@ export class ViewArticleComponent{
 				this.toast.setMessage("Error fetching articles", "danger"),
 		});
 	}
-	// The two methods down below acts differently
-	// to more or less get the same result
-	// I kept them both for educationnal purposes
+
 	findUsername(id: number): string | undefined {
 		return this.findByIdService.getUsername(id);
 	}
@@ -101,24 +89,66 @@ export class ViewArticleComponent{
 				});
 	}
 
+	isCurrentUser(id?: number): boolean {
+		const token = localStorage.getItem("token");
+		if (token) {
+			return id === this.auth.decodeIdFromToken(token);
+		}
+		return false;
+	}
+
+	editArticle(article: Article): void {
+		this.titre.setValue(article.titre);
+		this.contenu.setValue(article.contenu);
+		this.editMode = true;
+	}
+
+	setClassTitre(): object {
+		return { "is-invalid": !this.titre.pristine && !this.titre.valid };
+	}
+
 	setClassContenu(): object {
 		return { "is-invalid": !this.contenu.pristine && !this.contenu.valid };
 	}
 
-	addComment(): void {
-		this.commentService.addComment(this.commentForm.value).subscribe({
-			next: (_res) => {
-				this.toast.setMessage(
-					"You successfully added a comment!",
-					"success",
-				);
-				location.reload();
-			},
-			error: (_error) =>
-				this.toast.setMessage("Article already exists", "danger"),
-		});
+	submitEditArticle(): void {
+		this.articleService
+			.editArticle(this.articleEditionForm.value, this.id)
+			.subscribe({
+				next: (_res) => {
+					this.toast.setMessage(
+						"You successfully edited the article!",
+						"success",
+					);
+					location.reload();
+				},
+				error: (_error) =>
+					this.toast.setMessage(
+						"The article can't be edited",
+						"danger",
+					),
+			});
 	}
 
+	deleteArticle(): void {
+		const deletePrompt = confirm("Do you want to delete your article?");
+		if (deletePrompt) {
+			this.articleService.deleteArticle(this.id).subscribe({
+				next: (_res) => {
+					this.toast.setMessage(
+						"You successfully deleted your article!",
+						"success",
+					);
+					this.router.navigate(["/"]);
+				},
+				error: (_error) =>
+					this.toast.setMessage(
+						"Error, you can't delete your article!",
+						"danger",
+					),
+			});
+		}
+	}
 	back(): void {
 		this.location.back();
 	}

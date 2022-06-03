@@ -56,6 +56,4 @@ export class AddArticleComponent {
 				this.toast.setMessage("Article already exists", "danger"),
 		});
 	}
-
-	ngOnInit(): void {}
 }

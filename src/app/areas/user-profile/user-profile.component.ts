@@ -107,6 +107,5 @@ export class UserProfileComponent implements OnInit {
 					this.toast.setMessage("Please delete all your comments and articles beforehand", "danger"),
 			});
 		}
-
 	}
 }

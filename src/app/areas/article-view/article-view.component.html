@@ -2,7 +2,7 @@
 
 <section>
 	<h2>Article</h2>
-	<div class="card text-dark mb-3">
+	<div class="card text-dark mb-3" *ngIf="!editMode; else editBlock">
 		<div class="card-header">
 			<h5 class="title text-dark">{{ article.titre | empty }}</h5>
 			- {{ authorUsername }}
@@ -14,51 +14,87 @@
 		</div>
 		<div class="card-footer blockquote-footer">
 			{{ article.creation | date }}
+			<div class="float-right" *ngIf="isCurrentUser(article.id)">
+				<a class="card-link text-info" (click)="editArticle(article)"
+					>Edit</a
+				>
+				<a class="card-link text-danger" (click)="deleteArticle()"
+					>Delete</a
+				>
+			</div>
 		</div>
 	</div>
-	<h2>Comments ({{ comments.length }})</h2>
 
-	<div class="card text-dark mb-3">
-		<ul class="list-group list-group-flush">
-			<li class="list-group-item">
-				<form
-					class="input-group"
-					[formGroup]="commentForm"
-					(ngSubmit)="addComment()"
+	<ng-template #editBlock>
+		<div class="card text-dark mb-3">
+
+		<form
+			*ngIf="editMode"
+			class="input-group"
+			[formGroup]="articleEditionForm"
+			(ngSubmit)="submitEditArticle()"
+		>
+			<div class="card-header">
+				<input
+					[ngClass]="setClassTitre()"
+					id="titre"
+					name="titre"
+					type="text"
+					required="required"
+					class="form-control"
+					formControlName="titre"
+					maxlength="100"
+				/>
+				<p class="text-secondary">({{ titre.value | length }}/100)</p>
+			</div>
+			<div class="card-body">
+				<textarea
+					[ngClass]="setClassContenu()"
+					id="contenu"
+					name="contenu"
+					cols="40"
+					rows="5"
+					formControlName="contenu"
+					class="form-control"
+					required="required"
+					maxlength="240"
 				>
-					<input
-						type="text"
-						class="form-control"
-						id="contenu"
-						name="contenu"
-						formControlName="contenu"
-						required="required"
-						placeholder="Add a comment..."
-						maxlength="150"
-					/>
-					<span class="input-group-btn">
-						<button
-							class="btn btn-default"
-							type="submit"
-							[disabled]="!commentForm.valid"
-						>
-							Comment
-						</button>
-					</span>
-					<p class="text-secondary">
-						({{ contenu.value | length }}/150)
-					</p>
-				</form>
-			</li>
-			<li class="list-group-item" *ngFor="let comment of comments">
-				{{ comment.contenu | empty }}
-				<footer class="blockquote-footer">
-					<cite [routerLink]="['/user', comment.id]">{{
-						findUsername(comment.id) | empty
-					}}</cite>
-				</footer>
-			</li>
-		</ul>
-	</div>
+				</textarea>
+				<p class="text-secondary">({{ contenu.value | length }}/240)</p>
+				<div class="form-group btn-group">
+					<button
+						name="submit"
+						type="submit"
+						class="btn btn-primary"
+						[disabled]="!articleEditionForm.valid"
+					>
+						Edit article
+					</button>
+					<a
+						class="card-link text-danger"
+						(click)="editMode = !editMode"
+						>Cancel</a
+					>
+				</div>
+			</div>
+
+			<div class="card-footer blockquote-footer">
+				{{ article.creation | date }}
+				<div class="float-right" *ngIf="isCurrentUser(article.id)">
+					<a
+						class="card-link text-info"
+						(click)="editArticle(article)"
+						>Edit</a
+					>
+					<a class="card-link text-danger" (click)="deleteArticle()"
+						>Delete</a
+					>
+				</div>
+			</div>
+		</form>
+		</div>
+	</ng-template>
+
+	<app-article-view-comments></app-article-view-comments>
 	<a class="card-link" (click)="back()">Go back</a>
 </section>

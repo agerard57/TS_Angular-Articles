@@ -20,7 +20,7 @@ export class ArticleService {
 		return this.http.post<Article>(this.urlBase, article);
 	}
 
-	getArticle(id : number): Observable<Article> {
+	getArticle(id: number): Observable<Article> {
 		return this.http.get<Article>(`${this.urlBase}/${id}`);
 	}
 
@@ -28,24 +28,18 @@ export class ArticleService {
 		return this.http.get<Article[]>(this.urlBase);
 	}
 
-	getCommentByArticle(id : number): Observable<Article> {
-		return this.http.get<Article>(
-			`${this.urlBase}/${id}/comment`,
-		);
+	getCommentByArticle(id: number): Observable<Article> {
+		return this.http.get<Article>(`${this.urlBase}/${id}/comment`);
 	}
 
-	editArticle(article: Article): Observable<any> {
-		return this.http.put(
-			`${this.urlBase}/${article.id_article}`,
-			article,
-			{
-				responseType: "text",
-			},
-		);
+	editArticle(article: Article, id: number): Observable<any> {
+		return this.http.put(`${this.urlBase}/${id}`, article, {
+			responseType: "text",
+		});
 	}
 
-	deleteArticle(article: Article): Observable<any> {
-		return this.http.delete(`${this.urlBase}/${article.id_article}`, {
+	deleteArticle(id: number): Observable<any> {
+		return this.http.delete(`${this.urlBase}/${id}`, {
 			responseType: "text",
 		});
 	}

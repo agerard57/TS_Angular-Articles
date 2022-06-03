@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import {
+	FormGroup,
+	FormControl,
+	Validators,
+	FormBuilder,
+} from "@angular/forms";
 import { UserService } from "app/services/user.service";
 import { User } from "app/shared/models/user.model";
 import { ToastComponent } from "app/shared/toast/toast.component";
@@ -10,12 +15,12 @@ import { ToastComponent } from "app/shared/toast/toast.component";
 	styleUrls: ["./user-profile-edit.component.scss"],
 })
 export class UserProfileEditComponent {
-	@Input() userPseudo : User["pseudo"];
-	@Input() userEmail : User["email"];
-	@Input() userAvatar : User["avatar"];
-	
+	@Input() userPseudo: User["pseudo"];
+	@Input() userEmail: User["email"];
+	@Input() userAvatar: User["avatar"];
+
 	@Output() toggle = new EventEmitter<boolean>();
-	
+
 	user = new User();
 	editMode: boolean = true;
 	editProfileForm: FormGroup;
@@ -44,12 +49,17 @@ export class UserProfileEditComponent {
 		private userService: UserService,
 		public toast: ToastComponent,
 		private formBuilder: FormBuilder,
-	) {		this.editProfileForm = this.formBuilder.group({
-		pseudo: this.pseudo,
-		email: this.email,
-		password: this.password,
-		avatar: this.avatar,
-	});}
+	) {
+		this.pseudo.setValue(this.userPseudo);
+		this.email.setValue(this.userEmail);
+
+		this.editProfileForm = this.formBuilder.group({
+			pseudo: this.pseudo,
+			email: this.email,
+			password: this.password,
+			avatar: this.avatar,
+		});
+	}
 
 	setClassPseudo(): object {
 		return {
@@ -73,9 +83,9 @@ export class UserProfileEditComponent {
 		};
 	}
 
-	editModeToggle():void{
+	editModeToggle(): void {
 		this.editMode = !this.editMode;
-		this.toggle.emit(this.editMode)
+		this.toggle.emit(this.editMode);
 	}
 
 	editProfile(): void {
@@ -88,7 +98,10 @@ export class UserProfileEditComponent {
 				location.reload();
 			},
 			error: (_error) =>
-				this.toast.setMessage("You don't have the authorization to edit this", "danger"),
+				this.toast.setMessage(
+					"You don't have the authorization to edit this",
+					"danger",
+				),
 		});
 	}
 }
