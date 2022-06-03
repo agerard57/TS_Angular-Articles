@@ -12,6 +12,7 @@
 
 ## todo (fr)
 
+- julien@jdedev.fr
 - Liste utilisateurs
 - Détail utilisateurs
 - Liste des articles et des commentaires
