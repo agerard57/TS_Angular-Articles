@@ -55,11 +55,11 @@ export class AuthService {
 	}
 
 	setCurrentUser(userId: any): Observable<User> {
+		this.loggedIn = true;
 		return this.userService.getUser(userId).pipe(
 			take(1),
 			tap((user: User) => {
 				this.currentUser = user;
-				this.loggedIn = true;
 			}),
 		);
 	}

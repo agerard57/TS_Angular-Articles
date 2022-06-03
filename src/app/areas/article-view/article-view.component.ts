@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { User } from "app/shared/models/user.model";
 import { Comment } from "app/shared/models/comment.model";
 import { CommentService } from "app/services/comment.service";
@@ -22,7 +22,7 @@ import {
 	templateUrl: "./article-view.component.html",
 	styleUrls: ["./article-view.component.scss"],
 })
-export class ViewArticleComponent implements OnInit {
+export class ViewArticleComponent{
 	user = new User();
 	article = new Article();
 	comment = new Comment();
@@ -44,20 +44,19 @@ export class ViewArticleComponent implements OnInit {
 		private userService: UserService,
 		public toast: ToastComponent,
 		private location: Location,
-	) {}
-
-	ngOnInit(): void {
+	) {
 		this.route.params.subscribe((params) => {
-			this.commentForm = this.formBuilder.group({
-				contenu: this.contenu,
-				idArt: params["id"],
-			});
 			this.id = params["id"];
 			this.getArticle(params["id"]);
 			this.getComments(params["id"]);
 		});
-	}
 
+		this.commentForm = this.formBuilder.group({
+			contenu: this.contenu,
+			idArt: this.id,
+		});
+	}
+	
 	getComments(id: number): void {
 		this.commentService.getComments().subscribe({
 			next: (comments: Comment[]) => {
