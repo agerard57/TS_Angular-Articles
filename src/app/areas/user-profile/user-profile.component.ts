@@ -32,9 +32,9 @@ export class UserProfileComponent implements OnInit {
 	ngOnInit(): void {
 		this.route.params.subscribe((params) => {
 			this.id = params["id"];
-			this.getUserInfo(params["id"]);
-			this.getLastArticles(params["id"]);
-			this.getLastComments(params["id"]); //Use var
+			this.getUserInfo(this.id);
+			this.getLastArticles(this.id);
+			this.getLastComments(this.id);
 		});
 	}
 
@@ -83,5 +83,24 @@ export class UserProfileComponent implements OnInit {
 	onImgError(event: { target: { src: string } }) {
 		event.target.src =
 			"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
+	}
+
+	deleteProfile() :void {
+		const deletePrompt = prompt("Delete profile?\nPlease enter your username to continue...")
+		if (deletePrompt === this.user.pseudo)
+			{alert("Good Bye !");
+			this.userService.deleteUser(this.id).subscribe({
+				next: (_res) => {
+					this.toast.setMessage(
+						"You successfully deleted your account!",
+						"success",
+					);
+					this.auth.logout
+				},
+				error: (_error) =>
+					this.toast.setMessage("Please delete all your comments and articles beforehand", "danger"),
+			});
+		}
+
 	}
 }
