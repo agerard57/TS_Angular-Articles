@@ -3,7 +3,7 @@
 	<div class="card-columns">
 		<div
 			class="card text-white bg-dark mb-3"
-			*ngFor="let user of users;"
+			*ngFor="let user of users"
 			[routerLink]="['/user', user.id]"
 		>
 			<div class="row no-gutters">
@@ -15,7 +15,7 @@
 						alt="profile picture {{ user.id }}"
 					/>
 				</div>
-				<h5 class="card-body">{{ user.pseudo }}</h5>
+				<h5 class="card-body">{{ user.pseudo | empty }}</h5>
 			</div>
 		</div>
 	</div>

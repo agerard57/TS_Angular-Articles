@@ -80,7 +80,7 @@ export class RegisterComponent {
 					"You successfully registered!",
 					"success",
 				);
-				this.router.navigate(["/login"]);
+				this.router.navigate(["/user/login"]);
 			},
 			error: (_error) =>
 				this.toast.setMessage("Email already exists", "danger"),

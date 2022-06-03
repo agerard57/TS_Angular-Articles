@@ -1,39 +1,20 @@
 <section>
 	<h2>Article list</h2>
-	<div class="card text-dark mb-3" *ngFor="let article of articles;">
+	<div class="card text-dark mb-3" *ngFor="let article of articles">
 		<div class="card-header">
-			<h5 class="title text-dark">{{article.titre | empty}}</h5>
-			- agerard57
+			<h5 class="title text-dark">{{ article.titre | empty }}</h5>
+			- {{ findUsername(article.id) | empty }}
 		</div>
 		<div class="card-body">
 			<p class="card-text">
-				{{article.contenu | empty | truncate : 200 }}
+				{{ article.contenu | empty | truncate: 200 }}
 			</p>
-			<a href="" [routerLink]="['/article', article.id_article]" class="card-link">View article</a>
+			<a
+				href=""
+				[routerLink]="['/article', article.id_article]"
+				class="card-link"
+				>View article</a
+			>
 		</div>
-		<ul class="list-group list-group-flush">
-			<h6 class="card-header text-dark">Comments (20)</h6>
-			<li class="list-group-item">
-				Dapibus ac facilisis in
-				<footer class="blockquote-footer">
-					<cite>npoire13</cite>
-				</footer>
-			</li>
-			<li class="list-group-item">
-				Dapibus ac facilisis in
-				<footer class="blockquote-footer">
-					<cite>npoire13</cite>
-				</footer>
-			</li>
-			<li class="list-group-item">
-				Dapibus ac facilisis in
-				<footer class="blockquote-footer">
-					<cite>npoire13</cite>
-				</footer>
-			</li>
-			<li class="list-group-item"> <!-- TODO ONLY IF MORE THAN 3  -->
-				...
-			</li>
-		</ul>
 	</div>
 </section>

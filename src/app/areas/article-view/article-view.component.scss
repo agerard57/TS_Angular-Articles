@@ -1,9 +1,15 @@
 .title {
-    font-weight: bold;
-    display: contents;
-    text-transform: capitalize;
+	font-weight: bold;
+	display: contents;
+	text-transform: capitalize;
 }
 
-.card-link{
-    cursor: pointer;
+.card-link {
+	cursor: pointer;
+}
+
+cite:hover {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
 }

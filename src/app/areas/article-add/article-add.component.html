@@ -1,29 +1,43 @@
 <section>
 	<h2>Add an article</h2>
-	<form class="card mb-3">
+	<form class="card mb-3" [formGroup]="articleForm" (ngSubmit)="addArticle()">
 		<div class="form-group">
-			<label for="title" class="text-dark">Article title</label>
+			<label for="titre" class="text-dark">Article titre</label>
 			<input
-				id="title"
-				name="title"
+				[ngClass]="setClassTitre()"
+				id="titre"
+				name="titre"
 				type="text"
 				required="required"
 				class="form-control"
+				formControlName="titre"
+				maxlength="100"
 			/>
 		</div>
+		<p class="text-secondary">({{ titre.value | length }}/100)</p>
+
 		<div class="form-group">
-			<label for="content" class="text-dark">Article content</label>
+			<label for="contenu" class="text-dark">Article contenu</label>
 			<textarea
-				id="content"
-				name="content"
+				[ngClass]="setClassContenu()"
+				id="contenu"
+				name="contenu"
 				cols="40"
 				rows="5"
+				formControlName="contenu"
 				class="form-control"
 				required="required"
+				maxlength="240"
 			></textarea>
 		</div>
+		<p class="text-secondary">({{ contenu.value | length }}/240)</p>
 		<div class="form-group">
-			<button name="submit" type="submit" class="btn btn-primary">
+			<button
+				name="submit"
+				type="submit"
+				class="btn btn-primary"
+				[disabled]="!articleForm.valid"
+			>
 				Add article
 			</button>
 		</div>

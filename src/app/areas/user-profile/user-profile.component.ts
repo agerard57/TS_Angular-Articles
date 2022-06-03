@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { AuthService } from "app/services/auth.service";
+import { FindUsernameById } from "app/services/find-username-by-id.service";
 import { UserService } from "app/services/user.service";
 import { Article } from "app/shared/models/article.model";
 import { Comment } from "app/shared/models/comment.model";
@@ -14,13 +16,15 @@ import { ToastComponent } from "app/shared/toast/toast.component";
 export class UserProfileComponent implements OnInit {
 	user = new User();
 	article = new Article();
-	articles: Article[] = []
+	articles: Article[] = [];
 	comment = new Comment();
 	comments: Comment[] = [];
-	id="1"
+	id = 1;
 
 	constructor(
 		private route: ActivatedRoute,
+		private auth: AuthService,
+		private findByIdService: FindUsernameById,
 		private userService: UserService,
 		public toast: ToastComponent,
 	) {}
@@ -34,34 +38,46 @@ export class UserProfileComponent implements OnInit {
 		});
 	}
 
-	isCurrentUser():boolean{
-		const userID= localStorage.get("id")
-
-		return this.user === userID;
+	isCurrentUser(): boolean {
+		const token = localStorage.getItem("token");
+		if (token) {
+			return this.id == this.auth.decodeIdFromToken(token);
+		}
+		return false;
 	}
 
 	getUserInfo(id: number): void {
 		this.userService.getUser(id).subscribe({
-			next: (user: User) => (console.log(user)), //Doesn't seem right? next: (article: Article) => (console.log(article)),
+			next: (user: User) => (this.user = user), //Doesn't seem right? next: (article: Article) => (console.log(article)),
 			error: (_error: any) =>
 				this.toast.setMessage("Error fetching users", "danger"),
 		});
 	}
 
-	getLastArticles(id:number): void {
+	getLastArticles(id: number): void {
 		this.userService.getArticlesByUser(id).subscribe({
-			next: (articles: Article[]) => (this.articles = articles.slice(Math.max(articles.length - 3,0))),
+			next: (articles: Article[]) =>
+				(this.articles = articles.slice(
+					Math.max(articles.length - 3, 0),
+				)),
 			error: (_error: any) =>
 				this.toast.setMessage("Error fetching articles", "danger"),
 		});
 	}
 
-	getLastComments(id:number): void {
+	getLastComments(id: number): void {
 		this.userService.getCommentsByUser(id).subscribe({
-			next: (comments: Comment[]) => (this.comments = comments.slice(Math.max(comments.length - 3,0))),
+			next: (comments: Comment[]) =>
+				(this.comments = comments.slice(
+					Math.max(comments.length - 3, 0),
+				)),
 			error: (_error: any) =>
 				this.toast.setMessage("Error fetching comments", "danger"),
 		});
+	}
+
+	findUsername(id: number): string | undefined {
+		return this.findByIdService.getUsername(id);
 	}
 
 	onImgError(event: { target: { src: string } }) {

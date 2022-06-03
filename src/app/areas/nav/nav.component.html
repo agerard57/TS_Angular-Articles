@@ -43,7 +43,7 @@
 				Log in
 			</button></a
 		>
-		<a [routerLink]="['/user',this.id]" *ngIf="auth.loggedIn"
+		<a [routerLink]="['/user', auth.currentUser.id]" *ngIf="auth.loggedIn"
 			><button class="btn btn-outline-info my-2 my-sm-0">
 				Profile
 			</button></a

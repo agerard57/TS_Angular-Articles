@@ -5,14 +5,14 @@
 			<div class="card-body">
 				<div class="d-flex flex-column align-items-center text-center">
 					<img
-						src={{user.avatar}}
+						src="{{ user.avatar }}"
 						(error)="onImgError($event)"
 						alt="userImg"
 						class="rounded-circle"
 						width="150"
 					/>
 					<div class="mt-3">
-						<h4 class="text-dark">{{user.pseudo}}</h4>
+						<h4 class="text-dark">{{ user.pseudo | empty }}</h4>
 					</div>
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 							></path></svg
 						>Email
 					</h6>
-					<span class="text-secondary">{{user.email}}</span>
+					<span class="text-secondary">{{ user.email | empty }}</span>
 				</li>
 			</ul>
 		</div>
@@ -54,7 +54,9 @@
 					<div class="col-sm-3">
 						<h6 class="mb-0 text-secondary">Username</h6>
 					</div>
-					<div class="col-sm-9 text-dark">{{user.pseudo}}</div>
+					<div class="col-sm-9 text-dark">
+						{{ user.pseudo | empty }}
+					</div>
 				</div>
 				<hr />
 				<div class="row">
@@ -62,7 +64,7 @@
 						<h6 class="mb-0 text-secondary">Email</h6>
 					</div>
 					<div class="col-sm-9 text-dark">
-						{{user.email}}
+						{{ user.email | empty }}
 					</div>
 				</div>
 				<hr />
@@ -72,9 +74,9 @@
 					</div>
 					<div class="col-sm-9 text-dark">*********</div>
 				</div>
-				<hr />
+				<hr *ngIf="isCurrentUser()" />
 				<div class="row">
-					<div class="col-sm-12 btn-group">
+					<div class="col-sm-12 btn-group" *ngIf="isCurrentUser()">
 						<a class="btn btn-info" href="">Edit profile</a>
 						<a class="btn btn-danger" href="">Delete profile</a>
 					</div>
@@ -92,11 +94,17 @@
 							>
 						</h6>
 					</div>
-					<div class="card-body" *ngFor="let article of articles;">
-						<div class="row" >
+					<div class="card-body" *ngFor="let article of articles">
+						<div class="row">
 							<h6 class="mb-0">
-								<a class="link-secondary" href="" [routerLink]="['/article',article.id_article]"
-									>{{article.titre}}</a
+								<a
+									class="link-secondary"
+									href=""
+									[routerLink]="[
+										'/article',
+										article.id_article
+									]"
+									>{{ article.titre | empty }}</a
 								>
 							</h6>
 						</div>
@@ -112,12 +120,18 @@
 							>
 						</h6>
 					</div>
-					<div class="card-body" *ngFor="let comment of comments;">
+					<div class="card-body" *ngFor="let comment of comments">
 						<div class="row">
 							<span class="blockquote-footer" class="mb-0">
 								<cite
-									><a class="link-secondary" href="" [routerLink]="['/article',comment.id_article]"
-										>"{{comment.contenu}}"</a
+									><a
+										class="link-secondary"
+										href=""
+										[routerLink]="[
+											'/article',
+											comment.id_article
+										]"
+										>"{{ comment.contenu | empty }}"</a
 									></cite
 								>
 							</span>
