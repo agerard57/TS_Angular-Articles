@@ -11,6 +11,5 @@ import { AppInfoService } from "../../shared";
 export class HomeComponent {
 	title = this.appInfo.title;
 
-	constructor(public auth: AuthService,
-		private appInfo: AppInfoService) {}
+	constructor(public auth: AuthService, private appInfo: AppInfoService) {}
 }

@@ -1,30 +1,47 @@
 <div class="card bg-dark">
-  <h4 class="card-header">Login</h4>
-  <div class="card-body">
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i class="fa fa-envelope"></i>
-          </span>
-        </div>
-        <input [ngClass]="setClassEmail()" class="form-control" type="email" name="email"
-               formControlName="email" placeholder="Email" autofocus>
-      </div>
-	  <p>Enter your email</p>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i class="fa fa-key"></i>
-          </span>
-        </div>
-        <input [ngClass]="setClassPassword()" class="form-control" type="password" name="password"
-               formControlName="password" placeholder="Password">
-      </div>
-	  <p>Enter your password</p>
-      <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">
-        <i class="fa fa-sign-in"></i> Login
-      </button>
-    </form>
-  </div>
+	<h4 class="card-header">Login</h4>
+	<div class="card-body">
+		<form [formGroup]="loginForm" (ngSubmit)="login()">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<i class="fa fa-envelope"></i>
+					</span>
+				</div>
+				<input
+					[ngClass]="setClassEmail()"
+					class="form-control"
+					type="email"
+					name="email"
+					formControlName="email"
+					placeholder="Email"
+					autofocus
+				/>
+			</div>
+			<p>Enter your email</p>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<i class="fa fa-key"></i>
+					</span>
+				</div>
+				<input
+					[ngClass]="setClassPassword()"
+					class="form-control"
+					type="password"
+					name="password"
+					formControlName="password"
+					placeholder="Password"
+				/>
+			</div>
+			<p>Enter your password</p>
+			<button
+				class="btn btn-primary"
+				type="submit"
+				[disabled]="!loginForm.valid"
+			>
+				<i class="fa fa-sign-in"></i> Login
+			</button>
+		</form>
+	</div>
 </div>

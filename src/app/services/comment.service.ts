@@ -28,17 +28,13 @@ export class CommentService {
 		return this.http.get<Comment[]>(this.urlBase);
 	}
 
-	editComment(comment: Comment, commentId : number): Observable<any> {
-		return this.http.put(
-			`${this.urlBase}/${commentId}`,
-			comment,
-			{
-				responseType: "text",
-			},
-		);
+	editComment(comment: Comment, commentId: number): Observable<any> {
+		return this.http.put(`${this.urlBase}/${commentId}`, comment, {
+			responseType: "text",
+		});
 	}
 
-	deleteComment(id : number): Observable<any> {
+	deleteComment(id: number): Observable<any> {
 		return this.http.delete(`${this.urlBase}/${id}`, {
 			responseType: "text",
 		});

@@ -4,9 +4,7 @@
 		"max-nesting-depth": [
 			5,
 			{
-				"ignore": [
-					"blockless-at-rules"
-				]
+				"ignore": ["blockless-at-rules"]
 			}
 		]
 	}

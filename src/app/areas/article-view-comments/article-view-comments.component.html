@@ -1,66 +1,70 @@
 <app-toast [message]="toast.message"></app-toast>
 
-    <h2>Comments ({{ comments.length }})</h2>
-    
-	<div class="card text-dark mb-3">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <form
-                class="input-group"
-                [formGroup]="commentForm"
-                (ngSubmit)="addOrEditComment()"
-				>
-                <input
-                type="text"
-                class="form-control"
-                id="contenu"
-                name="contenu"
-                formControlName="contenu"
-                required="required"
-                placeholder="Add a comment..."
-                maxlength="150"
-                />
-                <span class="input-group-btn" *ngIf="!editMode; else editBlock">
-                    <button
-                    class="btn btn-default"
-                    type="submit"
-                    id="addSubmit"
-                    [disabled]="!commentForm.valid"
-                    >
-                    Comment
-                </button>
-            </span>
-            <ng-template class="input-group-btn" #editBlock>
-                <button
-                class="btn btn-link"
-                type="submit"
-                id="editSubmit"
-                [disabled]="!commentForm.valid"
-                >
-                Edit
-            </button>							<button
-            class="btn btn-default"
-            (click)="leaveEditMode()"
-            >
-            Cancel
-        </button>
-    </ng-template>
-    <p class="text-secondary">
-        ({{ contenu.value | length }}/150)
-    </p>
-</form>
-</li>
-<li class="list-group-item" *ngFor="let comment of comments">
-    {{ comment.contenu | empty }}
-    <footer class="blockquote-footer">
-        <cite [routerLink]="['/user', comment.id]">{{
-            findUsername(comment.id) | empty
-        }}</cite>
-        <div class="float-right" *ngIf="isCurrentUser(comment.id)">
-            <a class="card-link text-info" (click)="editComment(comment)">Edit</a>
-            <a class="card-link text-danger" (click)="deleteComment(comment.id)">Delete</a>
-        </div>
-    </footer>
-</li>
-</ul>
+<h2>Comments ({{ comments.length }})</h2>
+
+<div class="card text-dark mb-3">
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">
+			<form
+				class="input-group"
+				[formGroup]="commentForm"
+				(ngSubmit)="addOrEditComment()"
+			>
+				<input
+					type="text"
+					class="form-control"
+					id="contenu"
+					name="contenu"
+					formControlName="contenu"
+					required="required"
+					placeholder="Add a comment..."
+					maxlength="150"
+				/>
+				<span class="input-group-btn" *ngIf="!editMode; else editBlock">
+					<button
+						class="btn btn-default"
+						type="submit"
+						id="addSubmit"
+						[disabled]="!commentForm.valid"
+					>
+						Comment
+					</button>
+				</span>
+				<ng-template class="input-group-btn" #editBlock>
+					<button
+						class="btn btn-link"
+						type="submit"
+						id="editSubmit"
+						[disabled]="!commentForm.valid"
+					>
+						Edit
+					</button>
+					<button class="btn btn-default" (click)="leaveEditMode()">
+						Cancel
+					</button>
+				</ng-template>
+				<p class="text-secondary">({{ contenu.value | length }}/150)</p>
+			</form>
+		</li>
+		<li class="list-group-item" *ngFor="let comment of comments">
+			{{ comment.contenu | empty }}
+			<footer class="blockquote-footer">
+				<cite [routerLink]="['/user', comment.id]">{{
+					findUsername(comment.id) | empty
+				}}</cite>
+				<div class="float-right" *ngIf="isCurrentUser(comment.id)">
+					<a
+						class="card-link text-info"
+						(click)="editComment(comment)"
+						>Edit</a
+					>
+					<a
+						class="card-link text-danger"
+						(click)="deleteComment(comment.id)"
+						>Delete</a
+					>
+				</div>
+			</footer>
+		</li>
+	</ul>
 </div>

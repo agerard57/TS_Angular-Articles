@@ -27,71 +27,76 @@
 
 	<ng-template #editBlock>
 		<div class="card text-dark mb-3">
-
-		<form
-			*ngIf="editMode"
-			class="input-group"
-			[formGroup]="articleEditionForm"
-			(ngSubmit)="submitEditArticle()"
-		>
-			<div class="card-header">
-				<input
-					[ngClass]="setClassTitre()"
-					id="titre"
-					name="titre"
-					type="text"
-					required="required"
-					class="form-control"
-					formControlName="titre"
-					maxlength="100"
-				/>
-				<p class="text-secondary">({{ titre.value | length }}/100)</p>
-			</div>
-			<div class="card-body">
-				<textarea
-					[ngClass]="setClassContenu()"
-					id="contenu"
-					name="contenu"
-					cols="40"
-					rows="5"
-					formControlName="contenu"
-					class="form-control"
-					required="required"
-					maxlength="240"
-				>
-				</textarea>
-				<p class="text-secondary">({{ contenu.value | length }}/240)</p>
-				<div class="form-group btn-group">
-					<button
-						name="submit"
-						type="submit"
-						class="btn btn-primary"
-						[disabled]="!articleEditionForm.valid"
-					>
-						Edit article
-					</button>
-					<a
-						class="card-link text-danger"
-						(click)="editMode = !editMode"
-						>Cancel</a
-					>
+			<form
+				*ngIf="editMode"
+				class="input-group"
+				[formGroup]="articleEditionForm"
+				(ngSubmit)="submitEditArticle()"
+			>
+				<div class="card-header">
+					<input
+						[ngClass]="setClassTitre()"
+						id="titre"
+						name="titre"
+						type="text"
+						required="required"
+						class="form-control"
+						formControlName="titre"
+						maxlength="100"
+					/>
+					<p class="text-secondary">
+						({{ titre.value | length }}/100)
+					</p>
 				</div>
-			</div>
-
-			<div class="card-footer blockquote-footer">
-				{{ article.creation | date }}
-				<div class="float-right" *ngIf="isCurrentUser(article.id)">
-					<a
-						class="card-link text-info"
-						(click)="editArticle(article)"
-						>Edit</a
+				<div class="card-body">
+					<textarea
+						[ngClass]="setClassContenu()"
+						id="contenu"
+						name="contenu"
+						cols="40"
+						rows="5"
+						formControlName="contenu"
+						class="form-control"
+						required="required"
+						maxlength="240"
 					>
-					<a class="card-link text-danger" (click)="deleteArticle()"
-						>Delete</a
-					>
+					</textarea>
+					<p class="text-secondary">
+						({{ contenu.value | length }}/240)
+					</p>
+					<div class="form-group btn-group">
+						<button
+							name="submit"
+							type="submit"
+							class="btn btn-primary"
+							[disabled]="!articleEditionForm.valid"
+						>
+							Edit article
+						</button>
+						<a
+							class="card-link text-danger"
+							(click)="editMode = !editMode"
+							>Cancel</a
+						>
+					</div>
 				</div>
-			</div>
-		</form>
+
+				<div class="card-footer blockquote-footer">
+					{{ article.creation | date }}
+					<div class="float-right" *ngIf="isCurrentUser(article.id)">
+						<a
+							class="card-link text-info"
+							(click)="editArticle(article)"
+							>Edit</a
+						>
+						<a
+							class="card-link text-danger"
+							(click)="deleteArticle()"
+							>Delete</a
+						>
+					</div>
+				</div>
+			</form>
 		</div>
 	</ng-template>
 

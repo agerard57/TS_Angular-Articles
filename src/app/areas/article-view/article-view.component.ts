@@ -14,7 +14,6 @@ import {
 	Validators,
 	FormBuilder,
 } from "@angular/forms";
-import { CommentService } from "app/services/comment.service";
 
 @Component({
 	selector: "app-article-view",

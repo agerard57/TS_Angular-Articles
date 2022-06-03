@@ -90,7 +90,7 @@ export class ArticleViewCommentsComponent {
 				location.reload();
 			},
 			error: (_error) =>
-				this.toast.setMessage("This comment already exists", "danger"),
+				this.toast.setMessage("This comment cannot be published", "danger"),
 		});
 	}
 	submitEditComment(): void {
