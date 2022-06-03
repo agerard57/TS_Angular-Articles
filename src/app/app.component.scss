@@ -16,6 +16,7 @@ main {
 	flex-flow: column;
 	min-height: 100%;
 	margin-top: 5em;
+	margin-bottom: 70px;
 }
 
 footer {
@@ -23,9 +24,8 @@ footer {
 	min-height: 64px;
 	color: $footer-text-color;
 	background: $footer-bg-color;
-	position:fixed;	
-    bottom: 0;
-
+	position: fixed;
+	bottom: 0;
 
 	.fa-heart {
 		color: $footer-icon-color;
