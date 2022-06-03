@@ -1,17 +1,17 @@
-import { EmptyPipe } from './empty.pipe';
+import { EmptyPipe } from "./empty.pipe";
 
-describe('TruncatePipe', () => {
-  let pipe: EmptyPipe;
+describe("TruncatePipe", () => {
+	let pipe: EmptyPipe;
 
-  beforeEach(() => {
-    pipe = new EmptyPipe();
-  });
+	beforeEach(() => {
+		pipe = new EmptyPipe();
+	});
 
-  it('Should return n/a', () => {
-    expect(pipe.transform('')).toEqual('n/a');
-  });
+	it("Should return n/a", () => {
+		expect(pipe.transform("")).toEqual("n/a");
+	});
 
-  it('Should return n/a', () => {
-    expect(pipe.transform('   ')).toEqual('n/a');
-  });
+	it("Should return n/a", () => {
+		expect(pipe.transform("   ")).toEqual("n/a");
+	});
 });

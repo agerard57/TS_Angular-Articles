@@ -6,7 +6,7 @@ import { NgModule } from "@angular/core";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule } from "@auth0/angular-jwt";
 
 import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
@@ -19,6 +19,7 @@ import { TokenInterceptorService } from "./services/token-interceptor.service";
 import { AuthService } from "./services/auth.service";
 import { AuthGuardLogged } from "./services/auth-guard-logged.service";
 import { AuthGuardNotLogged } from "./services/auth-guard-not-logged.service";
+import { FindUsernameById } from "./services/find-username-by-id.service";
 import { ArticleService } from "./services/article.service";
 import { CommentService } from "./services/comment.service";
 import { CommonModule } from "@angular/common";
@@ -36,9 +37,9 @@ import { CommonModule } from "@angular/common";
 		BrowserTransferStateModule,
 		JwtModule.forRoot({
 			config: {
-			  tokenGetter: (): string | null => localStorage.getItem('token'),
-			}
-		  }),
+				tokenGetter: (): string | null => localStorage.getItem("token"),
+			},
+		}),
 		SharedModule,
 		AppRoutingModule,
 	],
@@ -50,6 +51,7 @@ import { CommonModule } from "@angular/common";
 		},
 		AuthService,
 		UserService,
+		FindUsernameById,
 		ArticleService,
 		CommentService,
 		AuthGuardLogged,

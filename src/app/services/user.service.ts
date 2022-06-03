@@ -34,12 +34,11 @@ export class UserService {
 		return this.http.get<User[]>(this.urlBase);
 	}
 
-	//TODO ANY ??
-	getArticlesByUser(id : number): Observable<any> {
+	getArticlesByUser(id: number): Observable<any> {
 		return this.http.get<User>(this.urlBase + `/${id}/article`);
 	}
 
-	getCommentsByUser(id : number): Observable<any> {
+	getCommentsByUser(id: number): Observable<any> {
 		return this.http.get<User>(this.urlBase + `/${id}/comment`);
 	}
 
@@ -49,7 +48,7 @@ export class UserService {
 		});
 	}
 
-	deleteUser(id : number): Observable<any> {
+	deleteUser(id: number): Observable<any> {
 		return this.http.delete(`${this.urlBase}/${id}`, {
 			responseType: "text",
 		});
