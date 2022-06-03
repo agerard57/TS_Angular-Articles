@@ -1,0 +1,73 @@
+<div class="card mb-3">
+	<div class="card-body">
+		<form [formGroup]="editProfileForm" (ngSubmit)="editProfile()">
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0 text-secondary">Username</h6>
+				</div>
+				<input
+					[ngClass]="setClassPseudo()"
+					class="form-control col-sm-9 text-dark"
+					type="text"
+					name="pseudo"
+					formControlName="pseudo"
+					autofocus
+				/>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0 text-secondary">Email</h6>
+				</div>
+				<input
+					[ngClass]="setClassEmail()"
+					class="form-control col-sm-9 text-dark"
+					type="email"
+					name="email"
+					formControlName="email"
+				/>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0 text-secondary">Password</h6>
+				</div>
+				<input
+					[ngClass]="setClassPassword()"
+					class="form-control col-sm-9 text-dark"
+					type="password"
+					name="password"
+					formControlName="password"
+				/>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0 text-secondary">Avatar URL</h6>
+				</div>
+				<input
+					[ngClass]="setClassAvatarUrl()"
+					class="form-control col-sm-9 text-dark"
+					type="url"
+					name="avatar"
+					formControlName="avatar"
+				/>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-sm-12 btn-group">
+					<button
+						class="btn btn-info"
+						type="submit"
+						[disabled]="!editProfileForm.valid"
+					>
+						Update profile
+					</button>
+					<a class="btn btn-danger" (click)="editModeToggle()"
+						>Cancel</a
+					>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

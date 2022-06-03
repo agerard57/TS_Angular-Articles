@@ -14,13 +14,14 @@ import { ToastComponent } from "app/shared/toast/toast.component";
 	styleUrls: ["./user-profile.component.scss"],
 })
 export class UserProfileComponent implements OnInit {
+	editMode: boolean = false;
 	user = new User();
 	article = new Article();
 	articles: Article[] = [];
 	comment = new Comment();
 	comments: Comment[] = [];
 	id = 1;
-
+	
 	constructor(
 		private route: ActivatedRoute,
 		private auth: AuthService,
@@ -35,6 +36,7 @@ export class UserProfileComponent implements OnInit {
 			this.getUserInfo(this.id);
 			this.getLastArticles(this.id);
 			this.getLastComments(this.id);
+			
 		});
 	}
 
@@ -48,7 +50,7 @@ export class UserProfileComponent implements OnInit {
 
 	getUserInfo(id: number): void {
 		this.userService.getUser(id).subscribe({
-			next: (user: User) => (this.user = user), //Doesn't seem right? next: (article: Article) => (console.log(article)),
+			next: (user: User) => (this.user = user),
 			error: (_error: any) =>
 				this.toast.setMessage("Error fetching users", "danger"),
 		});
@@ -83,6 +85,10 @@ export class UserProfileComponent implements OnInit {
 	onImgError(event: { target: { src: string } }) {
 		event.target.src =
 			"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
+	}
+
+	editModeToggle():void{
+		this.editMode = !this.editMode;
 	}
 
 	deleteProfile() :void {

@@ -15,6 +15,7 @@ import { LoginComponent } from "./login/login.component";
 import { LogoutComponent } from "./logout/logout.component";
 import { AuthGuardLogged } from "../services/auth-guard-logged.service";
 import { AuthGuardNotLogged } from "../services/auth-guard-not-logged.service";
+import { UserProfileEditComponent } from './user-profile-edit/user-profile-edit.component';
 
 export const AREAS_ROUTES: Routes = [
 	{ path: "", component: HomeComponent, pathMatch: "full" },
@@ -75,6 +76,7 @@ export const AREAS_COMPONENTS = [
 	LogoutComponent,
 	UserProfileComponent,
 	UserListComponent,
+	UserProfileEditComponent,
 	ErrorComponent,
 	NotFoundComponent,
 	ArticleListComponent,
