@@ -1,4 +1,4 @@
-# TS_NG-Articles
+# TS_Angular-Articles
 
 ![image](https://user-images.githubusercontent.com/56207146/171958546-6bec1033-0b01-4bff-977f-e26524bfc13c.png)
 
